@@ -1,3 +1,32 @@
+h1 {
+  color: #202124;
+  font-size: 20px;
+  margin: 0;
+  padding-top: 8px;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+  line-height: 18px;
+}
+
+ul.details {
+  display: inline;
+  font-size: 12px;
+  line-height: 14px;
+}
+li {
+  list-style-type: none;
+  color: #70757a;
+}
+li.description {
+  font-size: 13px;
+}
+img {
+  vertical-align: top;
+}
+
 .card {
   margin: 20px auto;
   max-width: 600px;
@@ -7,14 +36,19 @@
 }
 .card-footer {
   padding: 5px;
+  font-size: 12px;
 }
+
 .general-info {
   text-align: right;
 }
-ul {
-  padding: 0;
-  margin: 0;
+.temperature-today {
+  font-size: 62px;
+  line-height: 72px;
 }
-li {
-  list-style-type: none;
+.units {
+  font-size: 16px;
+}
+.weather-icon {
+  width: 80px;
 }
