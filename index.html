@@ -18,29 +18,54 @@
   <body>
     <div class="container">
       <div class="card">
+        <div class="row header">
+          <div class="col-8">
+            <form id="search-city-form">
+              <div class="row">
+                <div class="col-8">
+                  <input
+                    type="text"
+                    class="form-control w-100"
+                    placeholder="Type something"
+                    id="city-input"
+                  />
+                </div>
+                <div class="col-4">
+                  <input
+                    type="submit"
+                    class="submit btn btn-primary w-100"
+                    value="Search"
+                    id="submit-button"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-4">
+            <button class="btn btn-primary w-100" id="current-position-button">
+              Current Position
+            </button>
+          </div>
+        </div>
         <div class="card-body">
           <div class="row">
             <div class="col-6">
-              <img
-                src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
-                alt="weather icon"
-                class="weather-icon"
-              />
-              <span class="temperature-today">17</span>
+              <img src="" alt="" class="weather-icon" id="weather-icon" />
+              <span class="temperature-today" id="temperature-today"></span>
               <div class="d-inline-block">
                 <div class="units">°C | °F</div>
                 <ul class="details">
-                  <li>Humidity: 100%</li>
-                  <li>Wind: 14km/h</li>
+                  <li>Humidity: <span id="humidity"></span>%</li>
+                  <li>Wind: <span id="wind"></span>km/h</li>
                 </ul>
               </div>
             </div>
 
             <div class="col-6 general-info">
-              <h1 class="city">Saint-Antonin-Noble-Val</h1>
+              <h1 class="city" id="displayed-city"></h1>
               <ul>
-                <li class="date">Tuesday 18:09</li>
-                <li class="description">gathered clouds</li>
+                <li class="date" id="date"></li>
+                <li class="description" id="description"></li>
               </ul>
             </div>
           </div>

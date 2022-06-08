@@ -29,7 +29,8 @@ img {
 
 .card {
   margin: 20px auto;
-  max-width: 600px;
+  max-width: 650px;
+  min-width: 530px;
 }
 .card-body {
   padding: 5px;
@@ -38,9 +39,14 @@ img {
   padding: 5px;
   font-size: 12px;
 }
-
+.description:first-letter {
+  text-transform: capitalize;
+}
 .general-info {
   text-align: right;
+}
+.header {
+  padding: 5px;
 }
 .temperature-today {
   font-size: 62px;
