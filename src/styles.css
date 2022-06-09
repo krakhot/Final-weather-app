@@ -55,6 +55,11 @@ ul.details {
   background-color: #ffcbcb;
   color: #132743;
 }
+.btn:focus{
+  border-color: #ffb5b5;
+  background-color: #ffb5b5;
+  color: #132743;
+}
 .card {
   margin: 20px auto;
   max-width: 600px;
