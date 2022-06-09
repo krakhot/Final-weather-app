@@ -29,7 +29,7 @@ function determineCurrentCity(response){
 function determineCoordinates(position) {
   let lat = position.coords.latitude
   let lon = position.coords.longitude
-  let geoLocUrl = `http://api.openweathermap.org/geo/1.0/reverse`
+  let geoLocUrl = `https://api.openweathermap.org/geo/1.0/reverse`
   let apiUrl = `${geoLocUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`
   axios.get(apiUrl).then(determineCurrentCity)
 }
@@ -75,7 +75,7 @@ function updateWeatherData(response) {
   document.querySelector("#date").innerHTML = formatDate();
   let weatherIcon = response.data.weather[0].icon;
   let icon = document.querySelector("#weather-icon");
-  icon.setAttribute("src",`http://openweathermap.org/img/wn/${weatherIcon}@2x.png`);
+  icon.setAttribute("src",`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`);
   icon.setAttribute("alt", response.data.weather[0].description);
 
 }
