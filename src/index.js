@@ -85,7 +85,7 @@ document
 document.querySelector("#current-position-button")
   .addEventListener("click", getCurrentLocation)
 
-apiSearch("Annecy");
+apiSearch("saint-antonin-noble-val");
 
 
 //unit conversion

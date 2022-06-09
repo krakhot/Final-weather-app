@@ -1,36 +1,64 @@
+.first-color { 
+	background: #ffcbcb; 
+}
+	
+.second-color { 
+	background: #ffb5b5; 
+}
+
+.third-color { 
+	background: #407088; 
+}
+
+.fourth-color { 
+	background: #132743; 
+}
+
+a {
+  text-decoration: none;
+  color: #ffb5b5;
+}
+a:hover {
+  color: #ffcbcb;
+}
 h1 {
-  color: #202124;
+  color: #132743;
   font-size: 20px;
   margin: 0;
-  padding-top: 8px;
+  padding-top: 6px;
+}
+img {
+  vertical-align: top;
+}
+li {
+  list-style-type: none;
+  color: #407088;
 }
 ul {
   padding: 0;
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 18px;
 }
-
 ul.details {
   display: inline;
   font-size: 12px;
   line-height: 14px;
 }
-li {
-  list-style-type: none;
-  color: #70757a;
+.btn {
+  border-color: #ffb5b5;
+  background-color: #ffb5b5;
+  color: #132743;
 }
-li.description {
-  font-size: 13px;
+.btn:hover {
+  border-color: #ffcbcb;
+  background-color: #ffcbcb;
+  color: #132743;
 }
-img {
-  vertical-align: top;
-}
-
 .card {
   margin: 20px auto;
-  max-width: 650px;
-  min-width: 530px;
+  max-width: 600px;
+  min-width: 550px;
 }
 .card-body {
   padding: 5px;
@@ -56,14 +84,17 @@ img {
   font-size: 16px;
 }
 .units .active {
-  color: #202124;
+  color: #132743;
   text-decoration: none;
   cursor: default;
 }
 .units .active:hover{
   text-transform: none;
 }
-
 .weather-icon {
   width: 80px;
+}
+
+.searchButtonCol {
+  padding: 0;
 }
