@@ -55,6 +55,15 @@ img {
 .units {
   font-size: 16px;
 }
+.units .active {
+  color: #202124;
+  text-decoration: none;
+  cursor: default;
+}
+.units .active:hover{
+  text-transform: none;
+}
+
 .weather-icon {
   width: 80px;
 }
