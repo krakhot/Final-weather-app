@@ -10,6 +10,9 @@ function apiSearch(city) {
   let apiUrl = `${weatherUrl}?q=${city}&units=${unit}&appid=${apiKey}`;
   axios.get(apiUrl).then(updateWeatherData);
 }
+function clearSearchBar(){
+  document.querySelector("#city-input").value = "";
+}
 function convertToCelsius(event){
   event.preventDefault()
   tempToday.innerHTML = Math.round(celsiusTemperature)
@@ -63,6 +66,7 @@ function handleSubmit(event) {
   event.preventDefault();
   let userCity = document.querySelector("#city-input").value;
   apiSearch(userCity);
+  clearSearchBar()
 }
 function updateWeatherData(response) {
   document.querySelector("#displayed-city").innerHTML = response.data.name;
@@ -77,7 +81,6 @@ function updateWeatherData(response) {
   let icon = document.querySelector("#weather-icon");
   icon.setAttribute("src",`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`);
   icon.setAttribute("alt", response.data.weather[0].description);
-
 }
 
 document.querySelector("#search-city-form")
