@@ -79,18 +79,13 @@ function updateWeatherData(response) {
   icon.setAttribute("alt", response.data.weather[0].description);
 
 }
-document
-  .querySelector("#search-city-form")
+
+document.querySelector("#search-city-form")
   .addEventListener("submit", handleSubmit);
 document.querySelector("#current-position-button")
   .addEventListener("click", getCurrentLocation)
 
-apiSearch("saint-antonin-noble-val");
-
-
-//unit conversion
-
-
-
 celsiusLink.addEventListener("click", convertToCelsius)
 fahrenheitLink.addEventListener("click", convertToFahrenheit)
+  
+apiSearch("saint-antonin-noble-val");
