@@ -52,11 +52,32 @@ ul.details {
   padding: 5px;
   font-size: 12px;
 }
+.date{
+  color: #132743;
+  font-size: 16px;
+}
 .description:first-letter {
   text-transform: capitalize;
 }
+.forecast {
+  padding-top: 10px;
+}
+.forecast-details {
+  text-align: center;
+}
+.forecast-max-temp {
+  color: #132743;
+  font-size: 13px;
+}
+.forecast-min-temp {
+  color: #407088;
+  font-size: 13px;
+}
 .general-info {
   text-align: right;
+}
+.searchButtonCol {
+  padding: 0;
 }
 .temperature-today {
   font-size: 62px;
@@ -76,6 +97,7 @@ ul.details {
 .weather-icon {
   width: 80px;
 }
-.searchButtonCol {
-  padding: 0;
+.weather-icon-small {
+  width: 60px;
 }
+

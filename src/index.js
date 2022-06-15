@@ -92,3 +92,4 @@ celsiusLink.addEventListener("click", convertToCelsius)
 fahrenheitLink.addEventListener("click", convertToFahrenheit)
   
 apiSearch("saint-antonin-noble-val");
+
