@@ -36,6 +36,38 @@ function determineCoordinates(position) {
   let apiUrl = `${geoLocUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`
   axios.get(apiUrl).then(determineCurrentCity)
 }
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast")
+  let forecastHTML = `<div class="row">`;
+  let weekDays = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+  ];
+  weekDays.forEach(function(day) {
+  forecastHTML = forecastHTML + ` 
+  <div class="col-2 forecast-details">
+    <div class="date">${day}</div>
+      <img src="https://openweathermap.org/img/wn/03d@2x.png" alt="weather icon" class="weather-icon-small" />
+      <div class="forecast-temperature">
+        <span class="forecast-max-temp">
+          18°
+        </span>
+        <span class="forecast-min-temp">
+          12°
+        </span>               
+    </div>
+  </div>
+  `;
+})
+  forecastHTML = forecastHTML + `</div>`
+  forecastElement.innerHTML = forecastHTML
+  
+}
 function formatDate() {
   let now = new Date();
   let weekDays = [
@@ -81,6 +113,7 @@ function updateWeatherData(response) {
   let icon = document.querySelector("#weather-icon");
   icon.setAttribute("src",`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`);
   icon.setAttribute("alt", response.data.weather[0].description);
+  displayForecast();
 }
 
 document.querySelector("#search-city-form")
