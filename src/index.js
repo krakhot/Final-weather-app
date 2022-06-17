@@ -42,9 +42,31 @@ function determineCoordinates(position) {
   axios.get(apiUrl).then(determineCurrentCity)
 }
 function displayForecast(response) {
-  console.log(response.data)
   let forecastElement = document.querySelector("#forecast")
+  let forecast = response.data.daily;
   let forecastHTML = `<div class="row">`;
+  forecast.forEach(function(forecastDay, index) {
+    if (index < 6) {
+      forecastHTML = forecastHTML + ` 
+      <div class="col-2 forecast-details">
+        <div class="date">${formatDay(forecastDay.dt)}</div>
+          <img src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="weather icon" class="weather-icon-small" />
+          <div class="forecast-temperature">
+            <span class="forecast-max-temp">
+              ${Math.round(forecastDay.temp.max)}°
+            </span>
+            <span class="forecast-min-temp">
+              ${Math.round(forecastDay.temp.min)}°
+            </span>               
+        </div>
+      </div>
+      `;
+    }
+  })
+  forecastHTML = forecastHTML + `</div>`
+  forecastElement.innerHTML = forecastHTML
+}
+function formatDay(timestamp) {
   let weekDays = [
     "Sun",
     "Mon",
@@ -54,24 +76,10 @@ function displayForecast(response) {
     "Fri",
     "Sat",
   ];
-  weekDays.forEach(function(day) {
-    forecastHTML = forecastHTML + ` 
-    <div class="col-2 forecast-details">
-      <div class="date">${day}</div>
-        <img src="https://openweathermap.org/img/wn/03d@2x.png" alt="weather icon" class="weather-icon-small" />
-        <div class="forecast-temperature">
-          <span class="forecast-max-temp">
-            18°
-          </span>
-          <span class="forecast-min-temp">
-            12°
-          </span>               
-      </div>
-    </div>
-    `;
-  })
-  forecastHTML = forecastHTML + `</div>`
-  forecastElement.innerHTML = forecastHTML
+  let date = new Date(timestamp * 1000)
+  let day = date.getDay() + 1;
+  if (day >6) {day = 0}
+  return weekDays[day]
 }
 function formatDate() {
   let now = new Date();
@@ -86,13 +94,9 @@ function formatDate() {
   ];
   let day = weekDays[now.getDay()];
   let hours = now.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
   let minutes = now.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
+  if (hours < 10) {hours = `0${hours}`;}
+  if (minutes < 10) {minutes = `0${minutes}`;}
   return `${day} ${hours}:${minutes}`;
 }
 function getCurrentLocation(event) {
