@@ -1,14 +1,19 @@
 let apiKey = "6012fc2491a7112eae2e7a250ec9ffa1";
+let unit = "metric";
 let tempToday = document.querySelector("#temperature-today")
 let celsiusTemperature = null
 let celsiusLink = document.querySelector("#celsius-link")
 let fahrenheitLink = document.querySelector("#fahrenheit-link")
 
-function apiSearch(city) {
+function apiCurrentWeatherSearch (city) {
   let weatherUrl = "https://api.openweathermap.org/data/2.5/weather";
-  let unit = "metric";
   let apiUrl = `${weatherUrl}?q=${city}&units=${unit}&appid=${apiKey}`;
   axios.get(apiUrl).then(updateWeatherData);
+}
+function apiForecastSearch(coordinates){
+  let forecastUrl = `https://api.openweathermap.org/data/2.5/onecall`
+  let apiUrl = `${forecastUrl}?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`
+  axios.get(apiUrl).then(displayForecast)
 }
 function clearSearchBar(){
   document.querySelector("#city-input").value = "";
@@ -27,7 +32,7 @@ function convertToFahrenheit(event){
   fahrenheitLink.classList.add("active")
 }
 function determineCurrentCity(response){
-  apiSearch(response.data[0].name)
+  apiCurrentWeatherSearch(response.data[0].name)
 }
 function determineCoordinates(position) {
   let lat = position.coords.latitude
@@ -36,7 +41,8 @@ function determineCoordinates(position) {
   let apiUrl = `${geoLocUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`
   axios.get(apiUrl).then(determineCurrentCity)
 }
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data)
   let forecastElement = document.querySelector("#forecast")
   let forecastHTML = `<div class="row">`;
   let weekDays = [
@@ -49,24 +55,23 @@ function displayForecast() {
     "Sat",
   ];
   weekDays.forEach(function(day) {
-  forecastHTML = forecastHTML + ` 
-  <div class="col-2 forecast-details">
-    <div class="date">${day}</div>
-      <img src="https://openweathermap.org/img/wn/03d@2x.png" alt="weather icon" class="weather-icon-small" />
-      <div class="forecast-temperature">
-        <span class="forecast-max-temp">
-          18°
-        </span>
-        <span class="forecast-min-temp">
-          12°
-        </span>               
+    forecastHTML = forecastHTML + ` 
+    <div class="col-2 forecast-details">
+      <div class="date">${day}</div>
+        <img src="https://openweathermap.org/img/wn/03d@2x.png" alt="weather icon" class="weather-icon-small" />
+        <div class="forecast-temperature">
+          <span class="forecast-max-temp">
+            18°
+          </span>
+          <span class="forecast-min-temp">
+            12°
+          </span>               
+      </div>
     </div>
-  </div>
-  `;
-})
+    `;
+  })
   forecastHTML = forecastHTML + `</div>`
   forecastElement.innerHTML = forecastHTML
-  
 }
 function formatDate() {
   let now = new Date();
@@ -97,23 +102,22 @@ function getCurrentLocation(event) {
 function handleSubmit(event) {
   event.preventDefault();
   let userCity = document.querySelector("#city-input").value;
-  apiSearch(userCity);
+  apiCurrentWeatherSearch(userCity);
   clearSearchBar()
 }
 function updateWeatherData(response) {
   document.querySelector("#displayed-city").innerHTML = response.data.name;
   celsiusTemperature = response.data.main.temp
   tempToday.innerHTML = Math.round(celsiusTemperature);
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].description;
+  document.querySelector("#description").innerHTML = response.data.weather[0].description;
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
   document.querySelector("#date").innerHTML = formatDate();
   let weatherIcon = response.data.weather[0].icon;
-  let icon = document.querySelector("#weather-icon");
-  icon.setAttribute("src",`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`);
-  icon.setAttribute("alt", response.data.weather[0].description);
-  displayForecast();
+  let iconElement = document.querySelector("#weather-icon");
+  iconElement.setAttribute("src",`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`);
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+  apiForecastSearch(response.data.coord);
 }
 
 document.querySelector("#search-city-form")
@@ -124,5 +128,5 @@ document.querySelector("#current-position-button")
 celsiusLink.addEventListener("click", convertToCelsius)
 fahrenheitLink.addEventListener("click", convertToFahrenheit)
   
-apiSearch("saint-antonin-noble-val");
+apiCurrentWeatherSearch("saint-antonin-noble-val");
 
