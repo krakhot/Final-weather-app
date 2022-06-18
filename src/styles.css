@@ -70,7 +70,7 @@ ul.details {
   font-size: 13px;
 }
 .forecast-min-temp {
-  color: #407088;
+  color: #ffb5b5;
   font-size: 13px;
 }
 .general-info {
@@ -85,14 +85,9 @@ ul.details {
 }
 .units {
   font-size: 16px;
-}
-.units .active {
   color: #132743;
   text-decoration: none;
   cursor: default;
-}
-.units .active:hover{
-  text-transform: none;
 }
 .weather-icon {
   width: 80px;

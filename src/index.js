@@ -1,9 +1,6 @@
 let apiKey = "6012fc2491a7112eae2e7a250ec9ffa1";
 let unit = "metric";
 let tempToday = document.querySelector("#temperature-today")
-let celsiusTemperature = null
-let celsiusLink = document.querySelector("#celsius-link")
-let fahrenheitLink = document.querySelector("#fahrenheit-link")
 
 function apiCurrentWeatherSearch (city) {
   let weatherUrl = "https://api.openweathermap.org/data/2.5/weather";
@@ -17,19 +14,6 @@ function apiForecastSearch(coordinates){
 }
 function clearSearchBar(){
   document.querySelector("#city-input").value = "";
-}
-function convertToCelsius(event){
-  event.preventDefault()
-  tempToday.innerHTML = Math.round(celsiusTemperature)
-  celsiusLink.classList.add("active")
-  fahrenheitLink.classList.remove("active")
-}
-function convertToFahrenheit(event){
-  event.preventDefault()
-  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32
-  tempToday.innerHTML = Math.round(fahrenheitTemp)
-  celsiusLink.classList.remove("active")
-  fahrenheitLink.classList.add("active")
 }
 function determineCurrentCity(response){
   apiCurrentWeatherSearch(response.data[0].name)
@@ -49,7 +33,7 @@ function displayForecast(response) {
     if (index < 6) {
       forecastHTML = forecastHTML + ` 
       <div class="col-2 forecast-details">
-        <div class="date">${formatDay(forecastDay.dt)}</div>
+        <div class="date">${formatForecastDate(forecastDay.dt)}</div>
           <img src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="weather icon" class="weather-icon-small" />
           <div class="forecast-temperature">
             <span class="forecast-max-temp">
@@ -65,21 +49,6 @@ function displayForecast(response) {
   })
   forecastHTML = forecastHTML + `</div>`
   forecastElement.innerHTML = forecastHTML
-}
-function formatDay(timestamp) {
-  let weekDays = [
-    "Sun",
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-  ];
-  let date = new Date(timestamp * 1000)
-  let day = date.getDay() + 1;
-  if (day >6) {day = 0}
-  return weekDays[day]
 }
 function formatDate() {
   let now = new Date();
@@ -99,6 +68,21 @@ function formatDate() {
   if (minutes < 10) {minutes = `0${minutes}`;}
   return `${day} ${hours}:${minutes}`;
 }
+function formatForecastDate(timestamp) {
+  let weekDays = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+  ];
+  let date = new Date(timestamp * 1000)
+  let day = date.getDay() + 1;
+  if (day >6) {day = 0}
+  return weekDays[day]
+}
 function getCurrentLocation(event) {
   event.preventDefault()
   navigator.geolocation.getCurrentPosition(determineCoordinates)
@@ -111,8 +95,7 @@ function handleSubmit(event) {
 }
 function updateWeatherData(response) {
   document.querySelector("#displayed-city").innerHTML = response.data.name;
-  celsiusTemperature = response.data.main.temp
-  tempToday.innerHTML = Math.round(celsiusTemperature);
+  tempToday.innerHTML = Math.round(response.data.main.temp);
   document.querySelector("#description").innerHTML = response.data.weather[0].description;
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
@@ -128,9 +111,6 @@ document.querySelector("#search-city-form")
   .addEventListener("submit", handleSubmit);
 document.querySelector("#current-position-button")
   .addEventListener("click", getCurrentLocation)
-
-celsiusLink.addEventListener("click", convertToCelsius)
-fahrenheitLink.addEventListener("click", convertToFahrenheit)
   
 apiCurrentWeatherSearch("saint-antonin-noble-val");
 
