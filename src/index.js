@@ -107,10 +107,19 @@ function updateWeatherData(response) {
   apiForecastSearch(response.data.coord);
 }
 
+function changeTheme(event) {
+  if (event.target.checked) {
+    document.documentElement.setAttribute("data-theme", "blue")
+  } else {
+    document.documentElement.setAttribute("data-theme", "root")
+  }
+}
 document.querySelector("#search-city-form")
   .addEventListener("submit", handleSubmit);
 document.querySelector("#current-position-button")
   .addEventListener("click", getCurrentLocation)
+document.querySelector("#theme-checkbox")
+  .addEventListener("click", changeTheme)
   
 apiCurrentWeatherSearch("saint-antonin-noble-val");
 
