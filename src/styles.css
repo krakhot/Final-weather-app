@@ -118,6 +118,7 @@ ul.details {
   width: 60px;
 }
 
+/* theme switch */
 .switch {
   position: relative;
   display: inline-block;
@@ -140,7 +141,12 @@ ul.details {
   -webkit-transition: .4s;
   transition: .4s;
 }
-
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
 .slider:before {
   position: absolute;
   content: "";
@@ -155,20 +161,11 @@ ul.details {
 input:checked + .slider {
   background-color: var(--third-color)
 }
-
 input:focus + .slider {
   box-shadow: 0 0 1px var(--third-color)
 }
-
 input:checked + .slider:before {
   -webkit-transform: translateX(13px);
   -ms-transform: translateX(13px);
   transform: translateX(13px);
-}
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
 }
